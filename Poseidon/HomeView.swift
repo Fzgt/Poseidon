@@ -58,7 +58,14 @@ struct HomeView: View {
     private var statsRow: some View {
         HStack(spacing: 12) {
             StatCard(icon: "shippingbox.fill", value: "0", label: "Items", tint: .cyan)
-            StatCard(icon: "exclamationmark.triangle.fill", value: "0", label: "Expiring", tint: .orange)
+
+            NavigationLink {
+                ExpiringView()
+            } label: {
+                StatCard(icon: "exclamationmark.triangle.fill", value: "5", label: "Expiring", tint: .orange)
+            }
+            .buttonStyle(.plain)
+
             StatCard(icon: "leaf.fill", value: "0", label: "Fresh", tint: .green)
         }
     }
@@ -82,27 +89,23 @@ struct HomeView: View {
                 Text("Expiring soon")
                     .font(.headline)
                     .foregroundStyle(.white)
+
                 Spacer()
-                Text("See all")
-                    .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.7))
+
+                NavigationLink {
+                    ExpiringView()
+                } label: {
+                    Text("See all")
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.7))
+                }
+                .buttonStyle(.plain)
             }
 
             VStack(spacing: 12) {
-                Image(systemName: "snowflake")
-                    .font(.system(size: 44))
-                    .foregroundStyle(.white.opacity(0.55))
-                Text("Your fridge is empty")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.white.opacity(0.85))
-                Text("Tap Manual or Scan to add your first item")
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.55))
-                    .multilineTextAlignment(.center)
+                ExpiringPreviewRow(name: "Milk", status: "Today")
+                ExpiringPreviewRow(name: "Eggs", status: "Tomorrow")
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 36)
-            .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         }
     }
 }
@@ -148,6 +151,30 @@ private struct ActionButton: View {
             .background(.white.opacity(0.18), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
         .buttonStyle(.plain)
+    }
+}
+
+private struct ExpiringPreviewRow: View {
+    let name: String
+    let status: String
+
+    var body: some View {
+        HStack {
+            Text(name)
+                .font(.headline)
+                .foregroundStyle(.white)
+
+            Spacer()
+
+            Text(status)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(.white.opacity(0.20), in: Capsule())
+        }
+        .padding()
+        .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
 
