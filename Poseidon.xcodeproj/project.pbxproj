@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DD966622FAD0AC200374157 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966612FAD0AC200374157 /* Recipe.swift */; };
+		4DD966642FAD0AEA00374157 /* RecipeScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966632FAD0AEA00374157 /* RecipeScore.swift */; };
+		4DD966662FAD0B1600374157 /* RecipeRecommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966652FAD0B1600374157 /* RecipeRecommender.swift */; };
+		4DD966682FAD0B3F00374157 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966672FAD0B3F00374157 /* RecipeViewModel.swift */; };
+		4DD9666A2FAD0B5E00374157 /* RecipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966692FAD0B5E00374157 /* RecipeCardView.swift */; };
+		4DD9666C2FAD0B7A00374157 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9666B2FAD0B7A00374157 /* RecipeView.swift */; };
 		AA00000000000000000000F1 /* PoseidonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E1 /* PoseidonApp.swift */; };
 		AA00000000000000000000F2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E2 /* HomeView.swift */; };
 		AA00000000000000000000F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E3 /* Assets.xcassets */; };
@@ -15,6 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4DD966612FAD0AC200374157 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		4DD966632FAD0AEA00374157 /* RecipeScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScore.swift; sourceTree = "<group>"; };
+		4DD966652FAD0B1600374157 /* RecipeRecommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRecommender.swift; sourceTree = "<group>"; };
+		4DD966672FAD0B3F00374157 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
+		4DD966692FAD0B5E00374157 /* RecipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCardView.swift; sourceTree = "<group>"; };
+		4DD9666B2FAD0B7A00374157 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		AA00000000000000000000B2 /* Poseidon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poseidon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA00000000000000000000E1 /* PoseidonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseidonApp.swift; sourceTree = "<group>"; };
 		AA00000000000000000000E2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -56,6 +68,12 @@
 				AA00000000000000000000E1 /* PoseidonApp.swift */,
 				AA00000000000000000000E2 /* HomeView.swift */,
 				B7E9ACBF2FAB5C4B00ED783C /* ExpiringView.swift */,
+				4DD966612FAD0AC200374157 /* Recipe.swift */,
+				4DD966652FAD0B1600374157 /* RecipeRecommender.swift */,
+				4DD966672FAD0B3F00374157 /* RecipeViewModel.swift */,
+				4DD966692FAD0B5E00374157 /* RecipeCardView.swift */,
+				4DD9666B2FAD0B7A00374157 /* RecipeView.swift */,
+				4DD966632FAD0AEA00374157 /* RecipeScore.swift */,
 				AA00000000000000000000E3 /* Assets.xcassets */,
 				AA00000000000000000000A5 /* Preview Content */,
 			);
@@ -140,9 +158,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DD9666C2FAD0B7A00374157 /* RecipeView.swift in Sources */,
+				4DD966642FAD0AEA00374157 /* RecipeScore.swift in Sources */,
 				AA00000000000000000000F2 /* HomeView.swift in Sources */,
 				B7E9ACC02FAB5C4B00ED783C /* ExpiringView.swift in Sources */,
+				4DD966682FAD0B3F00374157 /* RecipeViewModel.swift in Sources */,
+				4DD9666A2FAD0B5E00374157 /* RecipeCardView.swift in Sources */,
+				4DD966662FAD0B1600374157 /* RecipeRecommender.swift in Sources */,
 				AA00000000000000000000F1 /* PoseidonApp.swift in Sources */,
+				4DD966622FAD0AC200374157 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
