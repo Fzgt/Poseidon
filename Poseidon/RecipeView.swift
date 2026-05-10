@@ -19,7 +19,12 @@ struct RecipeView: View {
                         emptyState
                     } else {
                         ForEach(scores) { score in
-                            RecipeCardView(recipeScore: score)
+                            NavigationLink {
+                                RecipeDetailView(recipeScore: score)
+                            } label: {
+                                RecipeCardView(recipeScore: score)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                 }

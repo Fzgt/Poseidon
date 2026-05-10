@@ -13,7 +13,7 @@ struct AddFoodView: View {
         name.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var canSave: Bool { !trimmedName.isEmpty }
+    private var canSave: Bool { !trimmedName.isEmpty && quantity >= 1 }
 
     var body: some View {
         ZStack {
@@ -25,6 +25,7 @@ struct AddFoodView: View {
 
                     nameField
                     quantityField
+                    unitField
                     expirySection
 
                     saveButton
@@ -62,44 +63,101 @@ struct AddFoodView: View {
 
     private var quantityField: some View {
         FieldCard(label: "Quantity") {
-            HStack {
-                Stepper(value: $quantity, in: 1...999) {
-                    HStack(spacing: 8) {
-                        Text("\(quantity)")
-                            .font(.headline)
-                            .foregroundStyle(.white)
-                        TextField(
-                            "",
-                            text: Binding(
-                                get: { unit },
-                                set: { unit = $0 }
-                            ),
-                            prompt: Text("unit").foregroundColor(.white.opacity(0.45))
-                        )
-                        .foregroundStyle(.white.opacity(0.85))
-                        .tint(.cyan)
-                        .autocorrectionDisabled()
-                    }
+            HStack(spacing: 16) {
+                stepperButton(systemName: "minus", disabled: quantity <= 1) {
+                    quantity = max(1, quantity - 1)
                 }
-                .labelsHidden()
+
+                TextField(
+                    "",
+                    value: $quantity,
+                    format: .number
+                )
+                .keyboardType(.numberPad)
+                .multilineTextAlignment(.center)
+                .font(.title3.weight(.bold))
+                .foregroundStyle(.white)
                 .tint(.cyan)
+                .frame(minWidth: 60)
+
+                stepperButton(systemName: "plus", disabled: quantity >= 999) {
+                    quantity = min(999, quantity + 1)
+                }
+
+                Spacer()
             }
         }
     }
 
-    private var expirySection: some View {
-        FieldCard(label: "Expires on") {
-            DatePicker(
+    private var unitField: some View {
+        FieldCard(label: "Unit (optional)") {
+            TextField(
                 "",
-                selection: $expiryDate,
-                in: Calendar.current.startOfDay(for: Date())...,
-                displayedComponents: .date
+                text: $unit,
+                prompt: Text("e.g. L, pcs, kg").foregroundColor(.white.opacity(0.45))
             )
-            .datePickerStyle(.compact)
-            .labelsHidden()
-            .colorScheme(.dark)
+            .foregroundStyle(.white)
             .tint(.cyan)
+            .autocorrectionDisabled()
         }
+    }
+
+    private func stepperButton(
+        systemName: String,
+        disabled: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.headline.weight(.bold))
+                .foregroundStyle(disabled ? Color.white.opacity(0.4) : .white)
+                .frame(width: 40, height: 40)
+                .background(.white.opacity(0.18), in: Circle())
+        }
+        .disabled(disabled)
+    }
+
+    private var expirySection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            FieldCard(label: "Expires on") {
+                DatePicker(
+                    "",
+                    selection: $expiryDate,
+                    in: Calendar.current.startOfDay(for: Date())...,
+                    displayedComponents: .date
+                )
+                .datePickerStyle(.compact)
+                .labelsHidden()
+                .colorScheme(.dark)
+                .tint(.cyan)
+            }
+
+            HStack(spacing: 6) {
+                Image(systemName: willBeExpiringSoon ? "exclamationmark.triangle.fill" : "info.circle")
+                    .font(.caption2)
+                    .foregroundStyle(willBeExpiringSoon ? .orange : .white.opacity(0.55))
+                Text(expiryHintText)
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.65))
+            }
+            .padding(.leading, 4)
+        }
+    }
+
+    private var willBeExpiringSoon: Bool {
+        let calendar = Calendar.current
+        let days = calendar.dateComponents(
+            [.day],
+            from: calendar.startOfDay(for: Date()),
+            to: calendar.startOfDay(for: expiryDate)
+        ).day ?? 0
+        return days <= 3
+    }
+
+    private var expiryHintText: String {
+        willBeExpiringSoon
+            ? "This item will appear in Expiring soon"
+            : "This item will appear in Fresh — Expiring soon shows items within 3 days"
     }
 
     private var saveButton: some View {
