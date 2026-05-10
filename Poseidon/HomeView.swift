@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(FoodStore.self) private var store
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -12,6 +14,7 @@ struct HomeView: View {
                         header
                         statsRow
                         quickActions
+                        recipesSection
                         expiringSection
                     }
                     .padding(.horizontal, 20)
@@ -57,16 +60,41 @@ struct HomeView: View {
 
     private var statsRow: some View {
         HStack(spacing: 12) {
-            StatCard(icon: "shippingbox.fill", value: "0", label: "Items", tint: .cyan)
-
             NavigationLink {
-                ExpiringView()
+                FoodListView(filter: .all)
             } label: {
-                StatCard(icon: "exclamationmark.triangle.fill", value: "5", label: "Expiring", tint: .orange)
+                StatCard(
+                    icon: "shippingbox.fill",
+                    value: "\(store.items.count)",
+                    label: "Items",
+                    tint: .cyan
+                )
             }
             .buttonStyle(.plain)
 
-            StatCard(icon: "leaf.fill", value: "0", label: "Fresh", tint: .green)
+            NavigationLink {
+                FoodListView(filter: .expiring)
+            } label: {
+                StatCard(
+                    icon: "exclamationmark.triangle.fill",
+                    value: "\(store.expiringSoon.count)",
+                    label: "Expiring",
+                    tint: .orange
+                )
+            }
+            .buttonStyle(.plain)
+
+            NavigationLink {
+                FoodListView(filter: .fresh)
+            } label: {
+                StatCard(
+                    icon: "leaf.fill",
+                    value: "\(store.fresh.count)",
+                    label: "Fresh",
+                    tint: .green
+                )
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -77,9 +105,50 @@ struct HomeView: View {
                 .foregroundStyle(.white)
 
             HStack(spacing: 12) {
-                ActionButton(icon: "square.and.pencil", title: "Manual") {}
+                NavigationLink {
+                    AddFoodView()
+                } label: {
+                    ActionPill(icon: "square.and.pencil", title: "Manual")
+                }
+                .buttonStyle(.plain)
+
                 ActionButton(icon: "camera.viewfinder", title: "Scan") {}
             }
+        }
+    }
+
+    private var recipesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Recipe ideas")
+                .font(.headline)
+                .foregroundStyle(.white)
+
+            NavigationLink {
+                RecipeView()
+            } label: {
+                HStack(spacing: 14) {
+                    Image(systemName: "fork.knife.circle.fill")
+                        .font(.system(size: 32))
+                        .foregroundStyle(.cyan)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Cook with your fridge")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.white)
+                        Text("See what you can make tonight")
+                            .font(.caption)
+                            .foregroundStyle(.white.opacity(0.6))
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.white.opacity(0.5))
+                }
+                .padding()
+                .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -93,7 +162,7 @@ struct HomeView: View {
                 Spacer()
 
                 NavigationLink {
-                    ExpiringView()
+                    FoodListView(filter: .expiring)
                 } label: {
                     Text("See all")
                         .font(.subheadline)
@@ -102,11 +171,30 @@ struct HomeView: View {
                 .buttonStyle(.plain)
             }
 
-            VStack(spacing: 12) {
-                ExpiringPreviewRow(name: "Milk", status: "Today")
-                ExpiringPreviewRow(name: "Eggs", status: "Tomorrow")
+            if store.expiringSoon.isEmpty {
+                expiringEmptyState
+            } else {
+                VStack(spacing: 12) {
+                    ForEach(store.expiringSoon.prefix(2)) { item in
+                        FoodRow(item: item)
+                    }
+                }
             }
         }
+    }
+
+    private var expiringEmptyState: some View {
+        VStack(spacing: 10) {
+            Image(systemName: "snowflake")
+                .font(.system(size: 40))
+                .foregroundStyle(.white.opacity(0.5))
+            Text("Nothing expiring soon")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.white.opacity(0.85))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 30)
+        .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
 
@@ -134,6 +222,22 @@ private struct StatCard: View {
     }
 }
 
+private struct ActionPill: View {
+    let icon: String
+    let title: String
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+            Text(title).fontWeight(.semibold)
+        }
+        .foregroundStyle(.white)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .background(.white.opacity(0.18), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+    }
+}
+
 private struct ActionButton: View {
     let icon: String
     let title: String
@@ -141,43 +245,13 @@ private struct ActionButton: View {
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 8) {
-                Image(systemName: icon)
-                Text(title).fontWeight(.semibold)
-            }
-            .foregroundStyle(.white)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
-            .background(.white.opacity(0.18), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            ActionPill(icon: icon, title: title)
         }
         .buttonStyle(.plain)
     }
 }
 
-private struct ExpiringPreviewRow: View {
-    let name: String
-    let status: String
-
-    var body: some View {
-        HStack {
-            Text(name)
-                .font(.headline)
-                .foregroundStyle(.white)
-
-            Spacer()
-
-            Text(status)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.white)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(.white.opacity(0.20), in: Capsule())
-        }
-        .padding()
-        .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-    }
-}
-
 #Preview {
     HomeView()
+        .environment(FoodStore())
 }

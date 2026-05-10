@@ -1,71 +1,54 @@
 import SwiftUI
 
 struct RecipeCardView: View {
-
     let recipeScore: RecipeScore
 
     var body: some View {
+        HStack(spacing: 14) {
+            Image(systemName: recipeScore.recipe.symbol)
+                .font(.system(size: 28))
+                .foregroundStyle(.cyan)
+                .frame(width: 56, height: 56)
+                .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
 
-        VStack(alignment: .leading, spacing: 12) {
-
-            Image(recipeScore.recipe.imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 180)
-                .clipped()
-                .cornerRadius(14)
-
-            Text(recipeScore.recipe.name)
-                .font(.title2)
-                .bold()
-
-            Text("Matched Ingredients")
-                .font(.headline)
-
-            Text(
-                recipeScore.matchedIngredients.joined(
-                    separator: ", "
-                )
-            )
-            .foregroundColor(.green)
-
-            Text(
-                "Recommendation Score: \(recipeScore.score, specifier: "%.2f")"
-            )
-            .foregroundColor(.orange)
-
-            VStack(alignment: .leading) {
-
-                Text("Why recommended?")
+            VStack(alignment: .leading, spacing: 6) {
+                Text(recipeScore.recipe.name)
                     .font(.headline)
+                    .foregroundStyle(.white)
 
-                Text(
-                    "This recipe uses ingredients that are expiring soon."
-                )
-                .foregroundColor(.red)
+                Text("Uses \(recipeScore.matchedIngredients.joined(separator: ", "))")
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.7))
+                    .lineLimit(2)
             }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .foregroundStyle(.white.opacity(0.4))
         }
         .padding()
-        .background(Color.white.opacity(0.12))
-        .cornerRadius(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
 
 #Preview {
-
-    RecipeCardView(
-
-        recipeScore: RecipeScore(
-
-            recipe: Recipe(
-                name: "Milk Pasta",
-                ingredients: ["Milk"],
-                imageName: "pasta"
-            ),
-
-            score: 1.0,
-
-            matchedIngredients: ["Milk"]
+    ZStack {
+        LinearGradient(
+            colors: [Color(red: 0.04, green: 0.10, blue: 0.28), Color(red: 0.10, green: 0.55, blue: 0.70)],
+            startPoint: .top,
+            endPoint: .bottom
         )
-    )
+        .ignoresSafeArea()
+
+        RecipeCardView(
+            recipeScore: RecipeScore(
+                recipe: Recipe.library[0],
+                score: 100,
+                matchedIngredients: ["Milk"]
+            )
+        )
+        .padding()
+    }
 }

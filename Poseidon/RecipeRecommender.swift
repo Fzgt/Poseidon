@@ -1,80 +1,27 @@
 import Foundation
 
-class RecipeRecommender {
-
-    func recommendRecipes(
-        ingredients: [Ingredient],
-        recipes: [Recipe]
-    ) -> [RecipeScore] {
-
-        var scoredRecipes: [RecipeScore] = []
-
-        for recipe in recipes {
-
-            var score: Double = 0
-            var matchedIngredients: [String] = []
-
-            for ingredient in ingredients {
-
-                if recipe.ingredients.contains(where: {
-                    $0.lowercased() == ingredient.name.lowercased()
-                }) {
-
-                    let priority = ingredientPriority(
-                        for: ingredient
-                    )
-
-                    score += priority
-
-                    matchedIngredients.append(
-                        ingredient.name
-                    )
+struct RecipeRecommender {
+    func recommend(items: [FoodItem], from library: [Recipe]) -> [RecipeScore] {
+        library
+            .compactMap { recipe in
+                let matched = items.filter { item in
+                    recipe.ingredients.contains { $0.lowercased() == item.name.lowercased() }
                 }
-            }
+                guard !matched.isEmpty else { return nil }
 
-            if score > 0 {
-
-                scoredRecipes.append(
-
-                    RecipeScore(
-                        recipe: recipe,
-                        score: score,
-                        matchedIngredients: matchedIngredients
-                    )
+                let score = matched.reduce(0.0) { $0 + priority(for: $1) }
+                return RecipeScore(
+                    recipe: recipe,
+                    score: score,
+                    matchedIngredients: matched.map(\.name)
                 )
             }
-        }
-
-        return scoredRecipes.sorted {
-            $0.score > $1.score
-        }
+            .sorted { $0.score > $1.score }
     }
 
-    func ingredientPriority(
-        for ingredient: Ingredient
-    ) -> Double {
-
-        let days = remainingDays(
-            until: ingredient.expiryDate
-        )
-
-        if days == 0 {
-            return 100
-        }
-
+    private func priority(for item: FoodItem) -> Double {
+        let days = item.daysUntilExpiry
+        if days <= 0 { return 100 }
         return 1.0 / Double(days)
-    }
-
-    func remainingDays(
-        until expiryDate: Date
-    ) -> Int {
-
-        let days = Calendar.current.dateComponents(
-            [.day],
-            from: Date(),
-            to: expiryDate
-        ).day ?? 0
-
-        return max(days, 0)
     }
 }
