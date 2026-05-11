@@ -2,8 +2,6 @@
 
 > Master of your fridge — an iOS app that tracks food expiry and suggests recipes from what's already in your fridge.
 
-UTS iOS capstone project.
-
 **Repository:** https://github.com/Fzgt/Poseidon
 
 ## Features
