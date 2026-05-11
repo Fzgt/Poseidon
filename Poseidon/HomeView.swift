@@ -176,7 +176,12 @@ struct HomeView: View {
             } else {
                 VStack(spacing: 12) {
                     ForEach(store.expiringSoon.prefix(2)) { item in
-                        FoodRow(item: item)
+                        NavigationLink {
+                            AddFoodView(editing: item)
+                        } label: {
+                            FoodRow(item: item)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }

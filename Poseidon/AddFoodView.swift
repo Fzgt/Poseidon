@@ -1,13 +1,29 @@
 import SwiftUI
 
 struct AddFoodView: View {
+    let editing: FoodItem?
+
     @Environment(\.dismiss) private var dismiss
     @Environment(FoodStore.self) private var store
 
-    @State private var name: String = ""
-    @State private var quantity: Int = 1
-    @State private var unit: String = ""
-    @State private var expiryDate: Date = Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date()
+    @State private var name: String
+    @State private var quantity: Int
+    @State private var unit: String
+    @State private var expiryDate: Date
+
+    init(editing: FoodItem? = nil) {
+        self.editing = editing
+        _name = State(initialValue: editing?.name ?? "")
+        _quantity = State(initialValue: editing?.quantity ?? 1)
+        _unit = State(initialValue: editing?.unit ?? "")
+        _expiryDate = State(
+            initialValue: editing?.expiryDate
+                ?? Calendar.current.date(byAdding: .day, value: 7, to: Date())
+                ?? Date()
+        )
+    }
+
+    private var isEditing: Bool { editing != nil }
 
     private var trimmedName: String {
         name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -30,23 +46,29 @@ struct AddFoodView: View {
 
                     saveButton
                         .padding(.top, 8)
+
+                    if isEditing {
+                        deleteButton
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
                 .padding(.bottom, 40)
             }
         }
-        .navigationTitle("Add to fridge")
+        .navigationTitle(isEditing ? "Edit item" : "Add to fridge")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
     }
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("New item")
+            Text(isEditing ? "Update item" : "New item")
                 .font(.title2.weight(.bold))
                 .foregroundStyle(.white)
-            Text("Track what's in your fridge before it spoils")
+            Text(isEditing
+                 ? "Change details or remove from fridge"
+                 : "Track what's in your fridge before it spoils")
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.7))
         }
@@ -102,21 +124,6 @@ struct AddFoodView: View {
         }
     }
 
-    private func stepperButton(
-        systemName: String,
-        disabled: Bool,
-        action: @escaping () -> Void
-    ) -> some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.headline.weight(.bold))
-                .foregroundStyle(disabled ? Color.white.opacity(0.4) : .white)
-                .frame(width: 40, height: 40)
-                .background(.white.opacity(0.18), in: Circle())
-        }
-        .disabled(disabled)
-    }
-
     private var expirySection: some View {
         VStack(alignment: .leading, spacing: 6) {
             FieldCard(label: "Expires on") {
@@ -162,7 +169,7 @@ struct AddFoodView: View {
 
     private var saveButton: some View {
         Button(action: save) {
-            Text("Add to fridge")
+            Text(isEditing ? "Save changes" : "Add to fridge")
                 .font(.headline)
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
@@ -177,14 +184,63 @@ struct AddFoodView: View {
         .disabled(!canSave)
     }
 
+    private var deleteButton: some View {
+        Button(role: .destructive, action: delete) {
+            HStack(spacing: 8) {
+                Image(systemName: "trash")
+                Text("Delete from fridge").fontWeight(.semibold)
+            }
+            .foregroundStyle(.red)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .background(.red.opacity(0.15), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        }
+    }
+
+    private func stepperButton(
+        systemName: String,
+        disabled: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.headline.weight(.bold))
+                .foregroundStyle(disabled ? Color.white.opacity(0.4) : .white)
+                .frame(width: 40, height: 40)
+                .background(.white.opacity(0.18), in: Circle())
+        }
+        .disabled(disabled)
+    }
+
     private func save() {
-        let item = FoodItem(
-            name: trimmedName,
-            quantity: quantity,
-            unit: unit.trimmingCharacters(in: .whitespaces),
-            expiryDate: expiryDate
-        )
-        store.add(item)
+        let trimmedUnit = unit.trimmingCharacters(in: .whitespaces)
+        if let editing {
+            store.update(
+                FoodItem(
+                    id: editing.id,
+                    name: trimmedName,
+                    quantity: quantity,
+                    unit: trimmedUnit,
+                    expiryDate: expiryDate
+                )
+            )
+        } else {
+            store.add(
+                FoodItem(
+                    name: trimmedName,
+                    quantity: quantity,
+                    unit: trimmedUnit,
+                    expiryDate: expiryDate
+                )
+            )
+        }
+        dismiss()
+    }
+
+    private func delete() {
+        if let editing {
+            store.remove(editing)
+        }
         dismiss()
     }
 
@@ -218,9 +274,16 @@ private struct FieldCard<Content: View>: View {
     }
 }
 
-#Preview {
+#Preview("Add") {
     NavigationStack {
         AddFoodView()
+            .environment(FoodStore())
+    }
+}
+
+#Preview("Edit") {
+    NavigationStack {
+        AddFoodView(editing: FoodStore.sampleItems[0])
             .environment(FoodStore())
     }
 }

@@ -74,22 +74,39 @@ struct FoodListView: View {
         ZStack {
             backgroundGradient.ignoresSafeArea()
 
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 16) {
-                    header
+            List {
+                header
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 12, trailing: 20))
 
-                    if items.isEmpty {
-                        emptyState
-                    } else {
-                        ForEach(items) { item in
+                if items.isEmpty {
+                    emptyState
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                } else {
+                    ForEach(items) { item in
+                        NavigationLink {
+                            AddFoodView(editing: item)
+                        } label: {
                             FoodRow(item: item)
+                        }
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                store.remove(item)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .padding(.bottom, 40)
             }
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
         }
         .navigationTitle(filter.title)
         .navigationBarTitleDisplayMode(.inline)
@@ -105,6 +122,7 @@ struct FoodListView: View {
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.7))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var emptyState: some View {

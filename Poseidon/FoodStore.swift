@@ -17,6 +17,12 @@ final class FoodStore {
         items.removeAll { $0.id == item.id }
     }
 
+    func update(_ item: FoodItem) {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            items[index] = item
+        }
+    }
+
     var expiringSoon: [FoodItem] {
         items
             .filter { $0.isExpiringSoon }
