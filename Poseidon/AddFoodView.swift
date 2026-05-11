@@ -11,9 +11,9 @@ struct AddFoodView: View {
     @State private var unit: String
     @State private var expiryDate: Date
 
-    init(editing: FoodItem? = nil) {
+    init(editing: FoodItem? = nil, prefillName: String? = nil) {
         self.editing = editing
-        _name = State(initialValue: editing?.name ?? "")
+        _name = State(initialValue: editing?.name ?? prefillName ?? "")
         _quantity = State(initialValue: editing?.quantity ?? 1)
         _unit = State(initialValue: editing?.unit ?? "")
         _expiryDate = State(

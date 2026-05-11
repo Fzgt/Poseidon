@@ -3,6 +3,9 @@ import SwiftUI
 struct HomeView: View {
     @Environment(FoodStore.self) private var store
 
+    @State private var showingScanner = false
+    @State private var scannedName: String?
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -23,6 +26,17 @@ struct HomeView: View {
                 }
             }
             .toolbar(.hidden)
+            .navigationDestination(item: $scannedName) { name in
+                AddFoodView(prefillName: name)
+            }
+        }
+        .fullScreenCover(isPresented: $showingScanner) {
+            ScannerView { name in
+                showingScanner = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    scannedName = name
+                }
+            }
         }
     }
 
@@ -112,7 +126,9 @@ struct HomeView: View {
                 }
                 .buttonStyle(.plain)
 
-                ActionButton(icon: "camera.viewfinder", title: "Scan") {}
+                ActionButton(icon: "camera.viewfinder", title: "Scan") {
+                    showingScanner = true
+                }
             }
         }
     }

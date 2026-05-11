@@ -4,6 +4,8 @@
 
 UTS iOS capstone project.
 
+**Repository:** https://github.com/Fzgt/Poseidon
+
 ## Features
 
 - 📦 **Track** — add food with name, quantity, unit, and expiry date

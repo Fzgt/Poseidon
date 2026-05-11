@@ -21,6 +21,7 @@
 		AA10000000000000000000F1 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000000000000000000E1 /* FoodItem.swift */; };
 		AA10000000000000000000F2 /* AddFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000000000000000000E2 /* AddFoodView.swift */; };
 		AA30000000000000000000F1 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30000000000000000000E1 /* RecipeDetailView.swift */; };
+		AA40000000000000000000F1 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40000000000000000000E1 /* ScannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		AA10000000000000000000E1 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		AA10000000000000000000E2 /* AddFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodView.swift; sourceTree = "<group>"; };
 		AA30000000000000000000E1 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		AA40000000000000000000E1 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				AA10000000000000000000E2 /* AddFoodView.swift */,
 				4DD966612FAD0AC200374157 /* Recipe.swift */,
 				AA30000000000000000000E1 /* RecipeDetailView.swift */,
+				AA40000000000000000000E1 /* ScannerView.swift */,
 				4DD966652FAD0B1600374157 /* RecipeRecommender.swift */,
 				4DD966672FAD0B3F00374157 /* FoodStore.swift */,
 				4DD966692FAD0B5E00374157 /* RecipeCardView.swift */,
@@ -174,6 +177,7 @@
 				AA10000000000000000000F1 /* FoodItem.swift in Sources */,
 				AA10000000000000000000F2 /* AddFoodView.swift in Sources */,
 				AA30000000000000000000F1 /* RecipeDetailView.swift in Sources */,
+				AA40000000000000000000F1 /* ScannerView.swift in Sources */,
 				4DD966682FAD0B3F00374157 /* FoodStore.swift in Sources */,
 				4DD9666A2FAD0B5E00374157 /* RecipeCardView.swift in Sources */,
 				4DD966662FAD0B1600374157 /* RecipeRecommender.swift in Sources */,
