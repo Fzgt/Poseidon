@@ -3,26 +3,45 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DD966622FAD0AC200374157 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966612FAD0AC200374157 /* Recipe.swift */; };
+		4DD966642FAD0AEA00374157 /* RecipeScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966632FAD0AEA00374157 /* RecipeScore.swift */; };
+		4DD966662FAD0B1600374157 /* RecipeRecommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966652FAD0B1600374157 /* RecipeRecommender.swift */; };
+		4DD966682FAD0B3F00374157 /* FoodStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966672FAD0B3F00374157 /* FoodStore.swift */; };
+		4DD9666A2FAD0B5E00374157 /* RecipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD966692FAD0B5E00374157 /* RecipeCardView.swift */; };
+		4DD9666C2FAD0B7A00374157 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9666B2FAD0B7A00374157 /* RecipeView.swift */; };
+		AA00000000000000000000F1 /* PoseidonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E1 /* PoseidonApp.swift */; };
+		AA00000000000000000000F2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E2 /* HomeView.swift */; };
 		AA00000000000000000000F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E3 /* Assets.xcassets */; };
 		AA00000000000000000000F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E4 /* Preview Assets.xcassets */; };
+		B7E9ACC02FAB5C4B00ED783C /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E9ACBF2FAB5C4B00ED783C /* FoodListView.swift */; };
+		AA10000000000000000000F1 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000000000000000000E1 /* FoodItem.swift */; };
+		AA10000000000000000000F2 /* AddFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000000000000000000E2 /* AddFoodView.swift */; };
+		AA30000000000000000000F1 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30000000000000000000E1 /* RecipeDetailView.swift */; };
+		AA40000000000000000000F1 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40000000000000000000E1 /* ScannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4DD966612FAD0AC200374157 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		4DD966632FAD0AEA00374157 /* RecipeScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeScore.swift; sourceTree = "<group>"; };
+		4DD966652FAD0B1600374157 /* RecipeRecommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRecommender.swift; sourceTree = "<group>"; };
+		4DD966672FAD0B3F00374157 /* FoodStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStore.swift; sourceTree = "<group>"; };
+		4DD966692FAD0B5E00374157 /* RecipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCardView.swift; sourceTree = "<group>"; };
+		4DD9666B2FAD0B7A00374157 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		AA00000000000000000000B2 /* Poseidon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poseidon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00000000000000000000E1 /* PoseidonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseidonApp.swift; sourceTree = "<group>"; };
+		AA00000000000000000000E2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AA00000000000000000000E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA00000000000000000000E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B7E9ACBF2FAB5C4B00ED783C /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
+		AA10000000000000000000E1 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		AA10000000000000000000E2 /* AddFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodView.swift; sourceTree = "<group>"; };
+		AA30000000000000000000E1 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		AA40000000000000000000E1 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		B7D7A96F2FB2DD1100B340DD /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
-		B7D7A9702FB2DD2400B340DD /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
-		B7D7A9712FB2DD3A00B340DD /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
-		B7D7A9732FB2DD8E00B340DD /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AA00000000000000000000D3 /* Frameworks */ = {
@@ -54,10 +73,19 @@
 		AA00000000000000000000A4 /* Poseidon */ = {
 			isa = PBXGroup;
 			children = (
-				B7D7A9732FB2DD8E00B340DD /* ViewModels */,
-				B7D7A9712FB2DD3A00B340DD /* Models */,
-				B7D7A9702FB2DD2400B340DD /* App */,
-				B7D7A96F2FB2DD1100B340DD /* Views */,
+				AA00000000000000000000E1 /* PoseidonApp.swift */,
+				AA00000000000000000000E2 /* HomeView.swift */,
+				B7E9ACBF2FAB5C4B00ED783C /* FoodListView.swift */,
+				AA10000000000000000000E1 /* FoodItem.swift */,
+				AA10000000000000000000E2 /* AddFoodView.swift */,
+				4DD966612FAD0AC200374157 /* Recipe.swift */,
+				AA30000000000000000000E1 /* RecipeDetailView.swift */,
+				AA40000000000000000000E1 /* ScannerView.swift */,
+				4DD966652FAD0B1600374157 /* RecipeRecommender.swift */,
+				4DD966672FAD0B3F00374157 /* FoodStore.swift */,
+				4DD966692FAD0B5E00374157 /* RecipeCardView.swift */,
+				4DD9666B2FAD0B7A00374157 /* RecipeView.swift */,
+				4DD966632FAD0AEA00374157 /* RecipeScore.swift */,
 				AA00000000000000000000E3 /* Assets.xcassets */,
 				AA00000000000000000000A5 /* Preview Content */,
 			);
@@ -86,12 +114,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				B7D7A96F2FB2DD1100B340DD /* Views */,
-				B7D7A9702FB2DD2400B340DD /* App */,
-				B7D7A9712FB2DD3A00B340DD /* Models */,
-				B7D7A9732FB2DD8E00B340DD /* ViewModels */,
 			);
 			name = Poseidon;
 			productName = Poseidon;
@@ -148,6 +170,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DD9666C2FAD0B7A00374157 /* RecipeView.swift in Sources */,
+				4DD966642FAD0AEA00374157 /* RecipeScore.swift in Sources */,
+				AA00000000000000000000F2 /* HomeView.swift in Sources */,
+				B7E9ACC02FAB5C4B00ED783C /* FoodListView.swift in Sources */,
+				AA10000000000000000000F1 /* FoodItem.swift in Sources */,
+				AA10000000000000000000F2 /* AddFoodView.swift in Sources */,
+				AA30000000000000000000F1 /* RecipeDetailView.swift in Sources */,
+				AA40000000000000000000F1 /* ScannerView.swift in Sources */,
+				4DD966682FAD0B3F00374157 /* FoodStore.swift in Sources */,
+				4DD9666A2FAD0B5E00374157 /* RecipeCardView.swift in Sources */,
+				4DD966662FAD0B1600374157 /* RecipeRecommender.swift in Sources */,
+				AA00000000000000000000F1 /* PoseidonApp.swift in Sources */,
+				4DD966622FAD0AC200374157 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
