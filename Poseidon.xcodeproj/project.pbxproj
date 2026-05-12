@@ -73,23 +73,79 @@
 		AA00000000000000000000A4 /* Poseidon */ = {
 			isa = PBXGroup;
 			children = (
-				AA00000000000000000000E1 /* PoseidonApp.swift */,
-				AA00000000000000000000E2 /* HomeView.swift */,
-				B7E9ACBF2FAB5C4B00ED783C /* FoodListView.swift */,
-				AA10000000000000000000E1 /* FoodItem.swift */,
-				AA10000000000000000000E2 /* AddFoodView.swift */,
-				4DD966612FAD0AC200374157 /* Recipe.swift */,
-				AA30000000000000000000E1 /* RecipeDetailView.swift */,
-				AA40000000000000000000E1 /* ScannerView.swift */,
-				4DD966652FAD0B1600374157 /* RecipeRecommender.swift */,
-				4DD966672FAD0B3F00374157 /* FoodStore.swift */,
-				4DD966692FAD0B5E00374157 /* RecipeCardView.swift */,
-				4DD9666B2FAD0B7A00374157 /* RecipeView.swift */,
-				4DD966632FAD0AEA00374157 /* RecipeScore.swift */,
+				AA50000000000000000000A1 /* App */,
+				AA50000000000000000000A2 /* Models */,
+				AA50000000000000000000A3 /* ViewModels */,
+				AA50000000000000000000A4 /* Views */,
 				AA00000000000000000000E3 /* Assets.xcassets */,
 				AA00000000000000000000A5 /* Preview Content */,
 			);
 			path = Poseidon;
+			sourceTree = "<group>";
+		};
+		AA50000000000000000000A1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000000000000000000E1 /* PoseidonApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA50000000000000000000A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000000000000000000E1 /* FoodItem.swift */,
+				4DD966612FAD0AC200374157 /* Recipe.swift */,
+				4DD966632FAD0AEA00374157 /* RecipeScore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA50000000000000000000A3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4DD966672FAD0B3F00374157 /* FoodStore.swift */,
+				4DD966652FAD0B1600374157 /* RecipeRecommender.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AA50000000000000000000A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA50000000000000000000A5 /* Food */,
+				AA50000000000000000000A6 /* Home */,
+				AA50000000000000000000A7 /* Recipe */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA50000000000000000000A5 /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000000000000000000E2 /* AddFoodView.swift */,
+				B7E9ACBF2FAB5C4B00ED783C /* FoodListView.swift */,
+				AA40000000000000000000E1 /* ScannerView.swift */,
+			);
+			path = Food;
+			sourceTree = "<group>";
+		};
+		AA50000000000000000000A6 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000000000000000000E2 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AA50000000000000000000A7 /* Recipe */ = {
+			isa = PBXGroup;
+			children = (
+				4DD966692FAD0B5E00374157 /* RecipeCardView.swift */,
+				AA30000000000000000000E1 /* RecipeDetailView.swift */,
+				4DD9666B2FAD0B7A00374157 /* RecipeView.swift */,
+			);
+			path = Recipe;
 			sourceTree = "<group>";
 		};
 		AA00000000000000000000A5 /* Preview Content */ = {
