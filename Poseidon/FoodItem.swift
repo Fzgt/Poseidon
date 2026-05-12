@@ -23,6 +23,8 @@ struct FoodItem: Identifiable, Hashable {
 }
 
 extension FoodItem {
+    static let expiringWindowDays: Int = 3
+
     var daysUntilExpiry: Int {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
@@ -39,5 +41,5 @@ extension FoodItem {
         }
     }
 
-    var isExpiringSoon: Bool { daysUntilExpiry <= 3 }
+    var isExpiringSoon: Bool { daysUntilExpiry <= Self.expiringWindowDays }
 }

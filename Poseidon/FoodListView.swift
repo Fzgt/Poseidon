@@ -25,8 +25,8 @@ struct FoodListView: View {
         var subheading: String {
             switch self {
             case .all: return "Sorted by expiry date"
-            case .expiring: return "Items expiring within the next 3 days"
-            case .fresh: return "Items with more than 3 days left"
+            case .expiring: return "Items already expired or expiring within \(FoodItem.expiringWindowDays) days"
+            case .fresh: return "Items with more than \(FoodItem.expiringWindowDays) days left"
             }
         }
 

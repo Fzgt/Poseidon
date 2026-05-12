@@ -4,7 +4,7 @@ struct HomeView: View {
     @Environment(FoodStore.self) private var store
 
     @State private var showingScanner = false
-    @State private var scannedName: String?
+    @State private var scanResult: ScanResult?
 
     var body: some View {
         NavigationStack {
@@ -26,15 +26,15 @@ struct HomeView: View {
                 }
             }
             .toolbar(.hidden)
-            .navigationDestination(item: $scannedName) { name in
-                AddFoodView(prefillName: name)
+            .navigationDestination(item: $scanResult) { result in
+                AddFoodView(prefillName: result.name)
             }
         }
         .fullScreenCover(isPresented: $showingScanner) {
             ScannerView { name in
                 showingScanner = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                    scannedName = name
+                    scanResult = ScanResult(name: name)
                 }
             }
         }
@@ -217,6 +217,11 @@ struct HomeView: View {
         .padding(.vertical, 30)
         .background(.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
+}
+
+private struct ScanResult: Identifiable, Hashable {
+    let id = UUID()
+    let name: String
 }
 
 private struct StatCard: View {

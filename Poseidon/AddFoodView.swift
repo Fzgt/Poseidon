@@ -158,13 +158,13 @@ struct AddFoodView: View {
             from: calendar.startOfDay(for: Date()),
             to: calendar.startOfDay(for: expiryDate)
         ).day ?? 0
-        return days <= 3
+        return days <= FoodItem.expiringWindowDays
     }
 
     private var expiryHintText: String {
         willBeExpiringSoon
             ? "This item will appear in Expiring soon"
-            : "This item will appear in Fresh — Expiring soon shows items within 3 days"
+            : "This item will appear in Fresh — Expiring soon shows items within \(FoodItem.expiringWindowDays) days"
     }
 
     private var saveButton: some View {

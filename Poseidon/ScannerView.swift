@@ -5,7 +5,7 @@ struct ScannerView: View {
     let onDetected: (String) -> Void
 
     private let viewfinderSize: CGFloat = 260
-    private let mockNames = ["Milk", "Eggs", "Bread", "Apple", "Yogurt", "Cheese", "Carrots", "Chicken"]
+    private let mockNames = ["Milk", "Eggs", "Bread", "Butter", "Yogurt", "Cheese", "Carrots", "Chicken"]
 
     @State private var scanOffset: CGFloat = -110
     @State private var detected: String?
